@@ -1,3 +1,5 @@
+This repo is based on https://github.com/pythian/cassandra-elk. Some parts are modified.
+
 The following is a model of setting up Cassandra logging for an existing ELK and Cassandra cluster.
 
 ## provision cluster

@@ -1,22 +1,11 @@
 version: '3'
 
 ################################################
-# adjacents docker-compose file for cassandra + ELK
-# updated April 2018
-# author: Valerie Parham-Thompson
+# 3 node cassandra + 1 node Elasticsearch + 1 Node Kibana
+# updated April 2021
+# author: Erkan SIRIN
 
 services:
-
-################################################
-# operations server; run commands here
-    app:
-        container_name: app
-        image: dataindataout/opsjump
-        hostname: app
-        networks:
-          myring:
-            ipv4_address: 172.16.238.10
-        command: tail -f /dev/null
 
 ################################################
 # servers to run a Cassandra cluster on
@@ -24,7 +13,7 @@ services:
 
     DC1C1:
         container_name: DC1C1
-        image: cassandra:latest
+        image: cassandra:3.11
         hostname: DC1C1
         networks: 
             - myring
@@ -43,7 +32,7 @@ services:
 
     DC1C2:
         container_name: DC1C2
-        image: cassandra:latest
+        image: cassandra:3.11
         hostname: DC1C2
         networks:
             - myring
@@ -64,7 +53,7 @@ services:
 
     DC1C3:
         container_name: DC1C3
-        image: cassandra:latest
+        image: cassandra:3.11
         hostname: DC1C3
         networks: 
             - myring
@@ -88,7 +77,7 @@ services:
 
     elasticsearch:
         container_name: elasticsearch
-        image: elasticsearch:latest
+        image: elasticsearch:7.10.1
         hostname: elasticsearch
         volumes:
           - ./configuration/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
@@ -103,7 +92,7 @@ services:
 
     kibana:
         container_name: kibana
-        image: kibana:latest
+        image: kibana:7.10.1
         hostname: kibana
         volumes:
           - ./configuration/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
